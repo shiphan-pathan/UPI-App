@@ -41,7 +41,7 @@ JWT_REFRESH_SECRET=refresh_key_upi_aap
 
 NODE_ENV=development
 
-🗄️ Prisma Setup
+# 🗄️ Prisma Setup
 
 # Generate Prisma client
 npx prisma generate
