@@ -34,4 +34,26 @@ model BankAccount {
   createdAt         DateTime @default(now())
 
   user User @relation(fields: [userId], references:[id])
+
+  sentTransactions     Transaction[] @relation("SentTransactions")
+  receivedTransactions Transaction[] @relation("ReceivedTransactions")
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model Transaction {
+  id                Int      @id @default(autoincrement())
+  senderId          Int
+  receiverId        Int
+  amount            Float
+  status            TransactionStatus @default(PENDING)
+
+  createdAt         DateTime @default(now())
+
+  sender            BankAccount @relation("SentTransactions", fields: [senderId], references: [id])
+  receiver          BankAccount @relation("ReceivedTransactions", fields: [receiverId], references: [id])
 }
